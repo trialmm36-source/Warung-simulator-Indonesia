@@ -27,6 +27,7 @@ jobs:
           cp -a WartegSimulatorIndonesia_Foundation/. .
           rm -rf WartegSimulatorIndonesia_Foundation
           rm -f WartegSimulatorIndonesia_Foundation.zip
+          rm -f .github/workflows/validate.yml
           printf ".godot/\n" > .gitignore
 
       - name: Validate Godot project
