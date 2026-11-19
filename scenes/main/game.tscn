@@ -37,6 +37,8 @@ script = ExtResource("3")
 [node name="Foreground" type="Node2D" parent="World"]
 
 [node name="GameSystems" type="Node" parent="."]
+[node name="TransactionManager" type="Node" parent="GameSystems"]
+script = ExtResource("9")
 
 [node name="TimeManager" type="Node" parent="GameSystems"]
 script = ExtResource("5")
