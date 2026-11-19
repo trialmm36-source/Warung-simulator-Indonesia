@@ -1,10 +1,12 @@
 
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/systems/game_root.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2"]
 [ext_resource type="Script" path="res://scripts/world/world_map.gd" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/buildings/warteg.tscn" id="4"]
+[ext_resource type="Script" path="res://scripts/systems/time_manager.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/systems/save_manager.gd" id="6"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1")
@@ -34,12 +36,14 @@ script = ExtResource("3")
 [node name="GameSystems" type="Node" parent="."]
 
 [node name="TimeManager" type="Node" parent="GameSystems"]
+script = ExtResource("5")
 
 [node name="EconomyManager" type="Node" parent="GameSystems"]
 
 [node name="InventoryManager" type="Node" parent="GameSystems"]
 
 [node name="SaveManager" type="Node" parent="GameSystems"]
+script = ExtResource("6")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
