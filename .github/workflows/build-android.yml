@@ -12,22 +12,73 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:4.4.1
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare build folder
-        run: mkdir -p build
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK packages
+        run: |
+          sdkmanager --sdk_root="$ANDROID_HOME" \
+            "platform-tools" \
+            "build-tools;33.0.2" \
+            "platforms;android-33"
+
+      - name: Setup Godot 4.4.1
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.4.1
+          use-dotnet: false
+          include-templates: true
+
+      - name: Setup Android signing
+        run: |
+          mkdir -p "$HOME/.android"
+          keytool -genkeypair -v \
+            -keystore "$HOME/.android/debug.keystore" \
+            -storepass android \
+            -alias androiddebugkey \
+            -keypass android \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 9999 \
+            -dname "CN=Android Debug,O=Android,C=US"
+
+      - name: Configure Godot Android settings
+        run: |
+          mkdir -p "$HOME/.config/godot"
+          cat > "$HOME/.config/godot/editor_settings-4.4.tres" <<EOF
+          [gd_resource type="EditorSettings" format=3]
+
+          [resource]
+          export/android/java_sdk_path = "$JAVA_HOME"
+          export/android/android_sdk_path = "$ANDROID_HOME"
+          export/android/debug_keystore = "$HOME/.android/debug.keystore"
+          export/android/debug_keystore_user = "androiddebugkey"
+          export/android/debug_keystore_pass = "android"
+          EOF
+
+      - name: Import project
+        run: godot --headless --editor --path . --quit
 
       - name: Build Android APK
-        run: godot --headless --path . --export-debug "Android" build/WartegSimulatorIndonesia.apk
+        run: |
+          mkdir -p build
+          godot --headless --path . \
+            --export-debug "Android" \
+            build/WartegSimulatorIndonesia.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: WartegSimulatorIndonesia-APK
           path: build/WartegSimulatorIndonesia.apk
-          
