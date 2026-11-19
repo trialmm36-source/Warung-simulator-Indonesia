@@ -1,5 +1,5 @@
 
-extends RefCounted
+extends Node
 
 const FOOD_DATA := {
     "nasi_putih": {
