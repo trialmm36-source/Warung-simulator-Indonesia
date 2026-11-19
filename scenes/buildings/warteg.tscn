@@ -1,0 +1,8 @@
+
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/buildings/warteg.gd" id="1"]
+
+[node name="Warteg" type="Node2D"]
+position = Vector2(500, -350)
+script = ExtResource("1")
