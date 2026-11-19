@@ -1,0 +1,33 @@
+
+name: Build Android APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.4.1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare build folder
+        run: mkdir -p build
+
+      - name: Build Android APK
+        run: godot --headless --path . --export-debug "Android" build/WartegSimulatorIndonesia.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: WartegSimulatorIndonesia-APK
+          path: build/WartegSimulatorIndonesia.apk
+          
