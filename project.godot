@@ -49,3 +49,5 @@ interact={
 
 FoodData="*res://scripts/systems/food_data.gd"
 PriceManager="*res://scripts/systems/price_manager.gd"
+EconomyManager="*res://scripts/systems/economy_manager.gd"
+InventoryManager="*res://scripts/systems/inventory_manager.gd"
