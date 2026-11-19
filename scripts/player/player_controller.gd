@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var move_speed: float = 180.0
 
 var joystick_direction: Vector2 = Vector2.ZERO
+var facing_direction: Vector2 = Vector2.DOWN
+var is_moving: bool = false
 
 
 func set_joystick_direction(direction: Vector2) -> void:
@@ -21,5 +23,18 @@ func _physics_process(_delta: float) -> void:
             "ui_down"
         )
 
+    is_moving = direction.length() > 0.1
+
+    if is_moving:
+        facing_direction = direction.normalized()
+
     velocity = direction * move_speed
     move_and_slide()
+
+
+func get_facing_direction() -> Vector2:
+    return facing_direction
+
+
+func is_character_moving() -> bool:
+    return is_moving
