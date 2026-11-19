@@ -39,6 +39,8 @@ script = ExtResource("3")
 script = ExtResource("5")
 
 [node name="EconomyManager" type="Node" parent="GameSystems"]
+[node name="EconomyManager" type="Node" parent="GameSystems"]
+script = ExtResource("7")
 
 [node name="InventoryManager" type="Node" parent="GameSystems"]
 
