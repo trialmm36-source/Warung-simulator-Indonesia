@@ -45,3 +45,6 @@ interact={
 "deadzone": 0.2,
 "events": []
 }
+[autoload]
+
+FoodData="*res://scripts/systems/food_data.gd"
