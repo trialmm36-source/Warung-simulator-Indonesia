@@ -2,10 +2,18 @@
 extends Node2D
 
 func _draw() -> void:
-    # Bayangan bangunan
-    draw_ellipse(
-        Vector2(0, 155),
-        Vector2(255, 75),
+        # Bayangan bangunan
+    draw_colored_polygon(
+        PackedVector2Array([
+            Vector2(-230, 155),
+            Vector2(-180, 115),
+            Vector2(0, 95),
+            Vector2(180, 115),
+            Vector2(230, 155),
+            Vector2(180, 195),
+            Vector2(0, 215),
+            Vector2(-180, 195)
+        ]),
         Color("#35452d")
     )
 
