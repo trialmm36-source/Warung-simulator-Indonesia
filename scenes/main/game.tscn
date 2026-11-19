@@ -43,13 +43,6 @@ script = ExtResource("9")
 [node name="TimeManager" type="Node" parent="GameSystems"]
 script = ExtResource("5")
 
-[node name="EconomyManager" type="Node" parent="GameSystems"]
-[node name="EconomyManager" type="Node" parent="GameSystems"]
-script = ExtResource("7")
-
-[node name="InventoryManager" type="Node" parent="GameSystems"]
-script = ExtResource("8")
-
 [node name="SaveManager" type="Node" parent="GameSystems"]
 script = ExtResource("6")
 
